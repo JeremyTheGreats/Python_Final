@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>J-Tech CustomBuild | Build Your Dream PC</title>
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Build Your Dream PC</h1>
+            <p>Find the best computer parts and create your perfect setup — fast, easy, and smart.</p>
+            <a href="{{ url_for('parts') }}" class="btn">Start Building</a>
+        </div>
+    </section>
+
+    <!-- Featured Parts Section -->
+    <section class="featured">
+        <h2>Featured Components</h2>
+        <div class="parts-grid">
+            <div class="part-card">
+                <img src="{{ url_for('static', filename='img/cpu1.jpg') }}" alt="CPU">
+                <h3>Powerful CPUs</h3>
+                <p>Experience lightning-fast performance for gaming and productivity.</p>
+            </div>
+            <div class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu1.jpg') }}" alt="GPU">
+                <h3>High-End GPUs</h3>
+                <p>Unleash your graphics power for immersive visuals and smooth gameplay.</p>
+            </div>
+            <div class="part-card">
+                <img src="{{ url_for('static', filename='img/mobo1.jpg') }}" alt="Motherboard">
+                <h3>Reliable Motherboards</h3>
+                <p>Connect your build with durable and future-proof motherboard options.</p>
+            </div>
+        </div>
+    </section>
+
+    
+
+{% endblock %}

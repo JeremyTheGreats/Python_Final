@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>J-Tech CustomBuild | PC Parts Catalog</title>
+{% endblock %}
+
+{% block content %}
+<section class="parts-header">
+    <h1>Computer Parts Catalog</h1>
+    <p>Browse from our wide selection of quality PC components to build your dream setup.</p>
+</section>
+
+<section class="parts-section">
+    <div class="parts-grid">
+        <!-- CPU -->
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/cpu1.jpg') }}" alt="CPU">
+            <h3>Intel Core i5-12400F</h3>
+            <p>6 Cores | 12 Threads | 4.4GHz Boost</p>
+            <p class="price">₱9,800</p>
+            <button class="btn">Add to Build</button>
+        </div>
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/cpu2.jpg') }}" alt="CPU">
+            <h3>AMD Ryzen 5 5600</h3>
+            <p>6 Cores | 12 Threads | 4.4GHz Boost</p>
+            <p class="price">₱8,999</p>
+            <button class="btn">Add to Build</button>
+        </div>
+
+        <!-- GPU -->
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/gpu1.jpg') }}" alt="GPU">
+            <h3>NVIDIA RTX 4070</h3>
+            <p>12GB GDDR6X | DLSS 3 | Ray Tracing</p>
+            <p class="price">₱38,000</p>
+            <button class="btn">Add to Build</button>
+        </div>
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/gpu2.jpg') }}" alt="GPU">
+            <h3>AMD Radeon RX 7800 XT</h3>
+            <p>16GB GDDR6 | RDNA 3 | Ray Tracing</p>
+            <p class="price">₱35,500</p>
+            <button class="btn">Add to Build</button>
+        </div>
+
+        <!-- RAM -->
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/ram1.jpg') }}" alt="RAM">
+            <h3>Corsair Vengeance 16GB DDR5</h3>
+            <p>6000MHz | CL36 | Dual Channel Kit</p>
+            <p class="price">₱5,200</p>
+            <button class="btn">Add to Build</button>
+        </div>
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/ram2.jpg') }}" alt="RAM">
+            <h3>G.Skill Trident Z RGB 32GB DDR4</h3>
+            <p>3600MHz | CL18 | Dual Channel Kit</p>
+            <p class="price">₱7,100</p>
+            <button class="btn">Add to Build</button>
+        </div>
+
+        <!-- Storage -->
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/ssd1.jpg') }}" alt="SSD">
+            <h3>Samsung 980 PRO NVMe SSD</h3>
+            <p>1TB | PCIe 4.0 | Read 7000MB/s</p>
+            <p class="price">₱7,499</p>
+            <button class="btn">Add to Build</button>
+        </div>
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/hdd1.jpg') }}" alt="HDD">
+            <h3>Seagate Barracuda 2TB HDD</h3>
+            <p>7200RPM | 256MB Cache</p>
+            <p class="price">₱3,100</p>
+            <button class="btn">Add to Build</button>
+        </div>
+
+        <!-- Motherboards -->
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/mobo1.jpg') }}" alt="Motherboard">
+            <h3>ASUS PRIME B660M-A</h3>
+            <p>Intel 12th Gen | DDR5 | mATX</p>
+            <p class="price">₱8,200</p>
+            <button class="btn">Add to Build</button>
+        </div>
+        <div class="part-card">
+            <img src="{{ url_for('static', filename='img/mobo2.jpg') }}" alt="Motherboard">
+            <h3>MSI B550M PRO-VDH</h3>
+            <p>AMD Ryzen | DDR4 | Micro-ATX</p>
+            <p class="price">₱7,700</p>
+            <button class="btn">Add to Build</button>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
