@@ -3,34 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J-Tech Custom Builds</title>
+    <title>{% block title %}J-Tech Custom Builds{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <!-- ===== HEADER ===== -->
     <header>
-        <div class="logo">J-Tech Custom Builds</div>
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="{{ url_for('parts') }}">Parts</a>
-            <a href="{{ url_for('login') }}">Login</a>
-        </nav>
+        <div class="navbar">
+            <div class="logo">J-Tech CustomBuild</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('parts') }}">Parts</a></li>
+
+                    {% if 'user' in session %}
+                        <li class="welcome">Welcome, {{ session['user'] }}</li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="{{ url_for('register') }}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </header>
 
+    <!-- ===== FLASH MESSAGES ===== -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- ===== MAIN CONTENT ===== -->
     <main>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <div class="flash-container">
-              {% for category, message in messages %}
-                <div class="flash {{ category }}">{{ message }}</div>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endwith %}
         {% block content %}{% endblock %}
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer>
-        <p>© 2025 J-Tech Custom Builds. All Rights Reserved.</p>
+        <p>© 2025 J-Tech CustomBuild. All rights reserved.</p>
     </footer>
 </body>
 </html>
