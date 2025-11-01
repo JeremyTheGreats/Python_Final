@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Choose Case | J-Tech Builder{% endblock %}
+{% block content %}
+<div class="builder-container">
+    <h2>Step 7: Choose Your PC Case</h2>
+    <p>Select the case that matches your build style and airflow needs.</p>
+
+    <form method="POST" class="parts-selection">
+        <div class="parts-grid">
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/case1.jpg') }}" alt="NZXT H510">
+                <input type="radio" name="case" value="NZXT H510" required>
+                <h3>NZXT H510</h3>
+                <p>Minimalist and clean design with great cable management.</p>
+                <p class="price">₱4,500</p>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/case2.jpg') }}" alt="Lian Li Lancool 215">
+                <input type="radio" name="case" value="Lian Li Lancool 215">
+                <h3>Lian Li Lancool 215</h3>
+                <p>Mesh front for superior airflow and RGB fans included.</p>
+                <p class="price">₱5,200</p>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/case3.jpg') }}" alt="Cooler Master NR600">
+                <input type="radio" name="case" value="Cooler Master NR600">
+                <h3>Cooler Master NR600</h3>
+                <p>Elegant and practical with full mesh for airflow.</p>
+                <p class="price">₱3,900</p>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/case4.jpg') }}" alt="DeepCool Matrexx 55">
+                <input type="radio" name="case" value="DeepCool Matrexx 55">
+                <h3>DeepCool Matrexx 55</h3>
+                <p>Tempered glass side panel and RGB-ready layout.</p>
+                <p class="price">₱3,500</p>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/case5.jpg') }}" alt="Phanteks Eclipse P360A">
+                <input type="radio" name="case" value="Phanteks Eclipse P360A">
+                <h3>Phanteks Eclipse P360A</h3>
+                <p>Stylish front mesh and pre-installed RGB fans.</p>
+                <p class="price">₱5,000</p>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/case6.jpg') }}" alt="Tecware Nexus M2">
+                <input type="radio" name="case" value="Tecware Nexus M2">
+                <h3>Tecware Nexus M2</h3>
+                <p>Compact and affordable micro-ATX case for budget builds.</p>
+                <p class="price">₱2,800</p>
+            </label>
+
+        </div>
+
+        <button type="submit" class="btn">Next → Summary</button>
+    </form>
+</div>
+{% endblock %}

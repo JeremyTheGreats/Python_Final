@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="builder-step">
+    <h1>Select Your Graphics Card (GPU)</h1>
+    <p class="step-description">Choose the best GPU for your <strong>{{ purpose }}</strong> build.</p>
+
+    <form method="POST" class="parts-grid">
+        {% if purpose == 'gaming' %}
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu1.jpg') }}" alt="NVIDIA RTX 4070">
+                <h3>NVIDIA RTX 4070</h3>
+                <p>₱38,000 — Best for 1440p gaming with DLSS 3 and Ray Tracing.</p>
+                <input type="radio" name="gpu" value="NVIDIA RTX 4070" required>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu2.jpg') }}" alt="AMD RX 7800 XT">
+                <h3>AMD Radeon RX 7800 XT</h3>
+                <p>₱35,500 — Great for high FPS gaming and editing.</p>
+                <input type="radio" name="gpu" value="AMD RX 7800 XT">
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu3.jpg') }}" alt="NVIDIA RTX 4060">
+                <h3>NVIDIA RTX 4060</h3>
+                <p>₱25,000 — Perfect for 1080p gaming at ultra settings.</p>
+                <input type="radio" name="gpu" value="NVIDIA RTX 4060">
+            </label>
+
+        {% elif purpose == 'office' %}
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu4.jpg') }}" alt="GTX 1650">
+                <h3>NVIDIA GTX 1650</h3>
+                <p>₱9,000 — Excellent for display support and light workloads.</p>
+                <input type="radio" name="gpu" value="NVIDIA GTX 1650" required>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu5.jpg') }}" alt="RX 6400">
+                <h3>AMD RX 6400</h3>
+                <p>₱8,500 — Energy-efficient and reliable for office use.</p>
+                <input type="radio" name="gpu" value="AMD RX 6400">
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu6.jpg') }}" alt="GT 1030">
+                <h3>NVIDIA GT 1030</h3>
+                <p>₱5,000 — Great for dual displays and light tasks.</p>
+                <input type="radio" name="gpu" value="NVIDIA GT 1030">
+            </label>
+
+        {% elif purpose == 'editing' %}
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu7.jpg') }}" alt="RTX 4080">
+                <h3>NVIDIA RTX 4080</h3>
+                <p>₱80,000 — Ideal for rendering, video editing, and 3D workloads.</p>
+                <input type="radio" name="gpu" value="NVIDIA RTX 4080" required>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu8.jpg') }}" alt="RX 7900 XTX">
+                <h3>AMD RX 7900 XTX</h3>
+                <p>₱75,000 — Excellent for creative professionals and high-res work.</p>
+                <input type="radio" name="gpu" value="AMD RX 7900 XTX">
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu9.jpg') }}" alt="RTX 4070 Ti">
+                <h3>NVIDIA RTX 4070 Ti</h3>
+                <p>₱55,000 — Great balance for editing and gaming.</p>
+                <input type="radio" name="gpu" value="NVIDIA RTX 4070 Ti">
+            </label>
+
+        {% elif purpose == 'budget' %}
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu10.jpg') }}" alt="RX 550">
+                <h3>AMD RX 550</h3>
+                <p>₱4,500 — Budget-friendly GPU for light gaming and office use.</p>
+                <input type="radio" name="gpu" value="AMD RX 550" required>
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu11.jpg') }}" alt="GT 1030">
+                <h3>NVIDIA GT 1030</h3>
+                <p>₱5,000 — Great for budget systems and basic tasks.</p>
+                <input type="radio" name="gpu" value="NVIDIA GT 1030">
+            </label>
+
+            <label class="part-card">
+                <img src="{{ url_for('static', filename='img/gpu12.jpg') }}" alt="RX 560">
+                <h3>AMD RX 560</h3>
+                <p>₱6,200 — Light gaming capable and energy-efficient.</p>
+                <input type="radio" name="gpu" value="AMD RX 560">
+            </label>
+        {% endif %}
+
+        <button type="submit" class="btn">Next →</button>
+    </form>
+</div>
+{% endblock %}

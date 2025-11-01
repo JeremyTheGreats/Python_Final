@@ -15,10 +15,12 @@
                 <ul>
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('parts') }}">Parts</a></li>
+                    <li><a href="{{ url_for('choose_purpose') }}">PC Builder</a></li>
 
                     {% if 'user' in session %}
                         <li class="welcome">Welcome, {{ session['user'] }}</li>
                         <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                        <li><a href="{{ url_for('my_builds') }}">My Builds</a></li>
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Login</a></li>
                         <li><a href="{{ url_for('register') }}">Register</a></li>

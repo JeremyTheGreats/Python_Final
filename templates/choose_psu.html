@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Choose PSU | J-Tech Builder{% endblock %}
+{% block content %}
+<div class="builder-container">
+    <h2>Step 6: Choose Your Power Supply</h2>
+    <p>Select a reliable PSU to power your entire build.</p>
+
+    <form method="POST" class="parts-selection">
+        <div class="parts-grid">
+
+            <label class="part-card">
+                <input type="radio" name="psu" value="Corsair 750W Bronze PSU" required>
+                <img src="{{ url_for('static', filename='img/psu1.jpg') }}" alt="Corsair 750W Bronze PSU">
+                <h3>Corsair 750W Bronze</h3>
+                <p>Reliable and efficient, great for most mid-range builds.</p>
+                <p class="price">₱3,800</p>
+            </label>
+
+            <label class="part-card">
+                <input type="radio" name="psu" value="Cooler Master 650W Gold PSU">
+                <img src="{{ url_for('static', filename='img/psu2.jpg') }}" alt="Cooler Master 650W Gold PSU">
+                <h3>Cooler Master 650W Gold</h3>
+                <p>Gold-rated for high efficiency and quiet operation.</p>
+                <p class="price">₱4,200</p>
+            </label>
+
+            <label class="part-card">
+                <input type="radio" name="psu" value="AeroCool 550W PSU">
+                <img src="{{ url_for('static', filename='img/psu3.jpg') }}" alt="AeroCool 550W PSU">
+                <h3>AeroCool 550W</h3>
+                <p>Budget-friendly and dependable for basic builds.</p>
+                <p class="price">₱2,500</p>
+            </label>
+
+            <label class="part-card">
+                <input type="radio" name="psu" value="Seasonic 850W Gold PSU">
+                <img src="{{ url_for('static', filename='img/psu4.jpg') }}" alt="Seasonic 850W Gold PSU">
+                <h3>Seasonic 850W Gold</h3>
+                <p>Premium efficiency and build quality for gaming rigs.</p>
+                <p class="price">₱6,000</p>
+            </label>
+
+            <label class="part-card">
+                <input type="radio" name="psu" value="Thermaltake 700W RGB PSU">
+                <img src="{{ url_for('static', filename='img/psu5.jpg') }}" alt="Thermaltake 700W RGB PSU">
+                <h3>Thermaltake 700W RGB</h3>
+                <p>RGB lighting and great performance for enthusiasts.</p>
+                <p class="price">₱5,300</p>
+            </label>
+
+            <label class="part-card">
+                <input type="radio" name="psu" value="EVGA 600W White PSU">
+                <img src="{{ url_for('static', filename='img/psu6.jpg') }}" alt="EVGA 600W White PSU">
+                <h3>EVGA 600W White</h3>
+                <p>Solid and affordable option for office or casual use.</p>
+                <p class="price">₱3,000</p>
+            </label>
+
+        </div>
+
+        <button type="submit" class="btn">Next → Case</button>
+    </form>
+</div>
+{% endblock %}

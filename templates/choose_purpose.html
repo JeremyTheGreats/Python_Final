@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Choose Purpose | J-Tech Builder{% endblock %}
+
+{% block content %}
+<main class="builder-page">
+    <div class="builder-container">
+        <h1>🧠 Choose Your PC Purpose</h1>
+        <p>Select the main purpose of your build to help us recommend the best parts.</p>
+
+        <form method="POST" class="purpose-form">
+            <div class="purpose-options">
+                <label class="purpose-card">
+                    <input type="radio" name="purpose" value="gaming" required>
+                    <div class="purpose-content">
+                        <h3>🎮 Gaming</h3>
+                        <p>High-performance setup for smooth gameplay and graphics.</p>
+                    </div>
+                </label>
+
+                <label class="purpose-card">
+                    <input type="radio" name="purpose" value="office">
+                    <div class="purpose-content">
+                        <h3>💼 Office Work</h3>
+                        <p>Reliable build for productivity, multitasking, and efficiency.</p>
+                    </div>
+                </label>
+
+                <label class="purpose-card">
+                    <input type="radio" name="purpose" value="editing">
+                    <div class="purpose-content">
+                        <h3>🎬 Video Editing</h3>
+                        <p>Powerful specs for rendering, editing, and creative tasks.</p>
+                    </div>
+                </label>
+
+                <label class="purpose-card">
+                    <input type="radio" name="purpose" value="budget">
+                    <div class="purpose-content">
+                        <h3>💰 Budget Build</h3>
+                        <p>Affordable setup with balanced performance for daily use.</p>
+                    </div>
+                </label>
+            </div>
+
+            <button type="submit" class="btn">Next →</button>
+        </form>
+    </div>
+</main>
+{% endblock %}

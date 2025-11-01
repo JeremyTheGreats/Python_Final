@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Choose CPU | J-Tech Builder{% endblock %}
+
+{% block content %}
+<main class="builder-page">
+    <div class="builder-container">
+        <h1>🧩 Choose Your Processor (CPU)</h1>
+        <p>You selected: <strong>{{ purpose|capitalize }}</strong> build. Pick a processor suited for this purpose.</p>
+
+        <form method="POST" class="parts-form">
+            <div class="parts-grid">
+
+                {% if purpose == 'gaming' %}
+                    <!-- Gaming CPUs -->
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Core i7-13700K" required>
+                        <img src="{{ url_for('static', filename='img/cpu1.jpg') }}" alt="Intel i7">
+                        <h3>Intel Core i7-13700K</h3>
+                        <p>16 Cores | 24 Threads | Ideal for high FPS gaming.</p>
+                        <p class="price">₱23,500</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="AMD Ryzen 7 7800X3D">
+                        <img src="{{ url_for('static', filename='img/cpu2.jpg') }}" alt="Ryzen 7">
+                        <h3>AMD Ryzen 7 7800X3D</h3>
+                        <p>8 Cores | 16 Threads | Excellent gaming performance.</p>
+                        <p class="price">₱22,900</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Core i5-13600KF">
+                        <img src="{{ url_for('static', filename='img/cpu3.jpg') }}" alt="Intel i5">
+                        <h3>Intel Core i5-13600KF</h3>
+                        <p>14 Cores | 20 Threads | Great mid-tier gaming CPU.</p>
+                        <p class="price">₱17,800</p>
+                    </label>
+
+                {% elif purpose == 'office' %}
+                    <!-- Office CPUs -->
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Core i3-13100" required>
+                        <img src="{{ url_for('static', filename='img/cpu4.jpg') }}" alt="Intel i3">
+                        <h3>Intel Core i3-13100</h3>
+                        <p>4 Cores | 8 Threads | Great for multitasking and browsing.</p>
+                        <p class="price">₱8,200</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="AMD Ryzen 3 4100">
+                        <img src="{{ url_for('static', filename='img/cpu5.jpg') }}" alt="Ryzen 3">
+                        <h3>AMD Ryzen 3 4100</h3>
+                        <p>4 Cores | 8 Threads | Affordable and efficient.</p>
+                        <p class="price">₱6,999</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Core i5-12400">
+                        <img src="{{ url_for('static', filename='img/cpu6.jpg') }}" alt="Intel i5">
+                        <h3>Intel Core i5-12400</h3>
+                        <p>6 Cores | 12 Threads | Smooth office performance.</p>
+                        <p class="price">₱9,800</p>
+                    </label>
+
+                {% elif purpose == 'editing' %}
+                    <!-- Editing CPUs -->
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="AMD Ryzen 9 7950X" required>
+                        <img src="{{ url_for('static', filename='img/cpu7.jpg') }}" alt="Ryzen 9">
+                        <h3>AMD Ryzen 9 7950X</h3>
+                        <p>16 Cores | 32 Threads | Outstanding for video rendering.</p>
+                        <p class="price">₱34,500</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Core i9-13900K">
+                        <img src="{{ url_for('static', filename='img/cpu8.jpg') }}" alt="Intel i9">
+                        <h3>Intel Core i9-13900K</h3>
+                        <p>24 Cores | 32 Threads | Best for editing and 3D work.</p>
+                        <p class="price">₱36,000</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="AMD Ryzen 7 7700">
+                        <img src="{{ url_for('static', filename='img/cpu9.jpg') }}" alt="Ryzen 7">
+                        <h3>AMD Ryzen 7 7700</h3>
+                        <p>8 Cores | 16 Threads | Efficient and powerful for creators.</p>
+                        <p class="price">₱20,500</p>
+                    </label>
+
+                {% elif purpose == 'budget' %}
+                    <!-- Budget CPUs -->
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Pentium Gold G7400" required>
+                        <img src="{{ url_for('static', filename='img/cpu10.jpg') }}" alt="Pentium">
+                        <h3>Intel Pentium Gold G7400</h3>
+                        <p>2 Cores | 4 Threads | Perfect for simple tasks and browsing.</p>
+                        <p class="price">₱4,200</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="AMD Athlon 3000G">
+                        <img src="{{ url_for('static', filename='img/cpu11.jpg') }}" alt="Athlon">
+                        <h3>AMD Athlon 3000G</h3>
+                        <p>2 Cores | 4 Threads | Budget-friendly everyday CPU.</p>
+                        <p class="price">₱3,800</p>
+                    </label>
+
+                    <label class="part-card">
+                        <input type="radio" name="cpu" value="Intel Core i3-10100">
+                        <img src="{{ url_for('static', filename='img/cpu12.jpg') }}" alt="Intel i3">
+                        <h3>Intel Core i3-10100</h3>
+                        <p>4 Cores | 8 Threads | Balanced choice for affordable builds.</p>
+                        <p class="price">₱6,500</p>
+                    </label>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn">Next → Choose Motherboard</button>
+        </form>
+    </div>
+</main>
+{% endblock %}
