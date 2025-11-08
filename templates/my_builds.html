@@ -1,43 +1,25 @@
 {% extends "base.html" %}
-{% block title %}My Builds | J-Tech Builder{% endblock %}
-
+{% block title %}My Builds | J-Tech{% endblock %}
 {% block content %}
-<section class="my-builds">
-    <h2>🧰 My Saved PC Builds</h2>
-    <p>View and manage your previously built PC configurations.</p>
+<div class="builder-container">
+  <h2>🧰 My PC Builds</h2>
 
-    {% if builds %}
-    <div class="builds-grid">
-        {% for build in builds %}
-        <div class="build-card">
-            <div class="build-header">
-                <h3>{{ build[1] | capitalize }} Build</h3>
-                <span class="build-date">{{ build[9] }}</span>
-            </div>
-
-            <ul class="build-specs">
-                <li><strong>CPU:</strong> {{ build[2] }}</li>
-                <li><strong>Motherboard:</strong> {{ build[3] }}</li>
-                <li><strong>RAM:</strong> {{ build[4] }}</li>
-                <li><strong>GPU:</strong> {{ build[5] }}</li>
-                <li><strong>Storage:</strong> {{ build[6] }}</li>
-                <li><strong>PSU:</strong> {{ build[7] }}</li>
-                <li><strong>Case:</strong> {{ build[8] }}</li>
-            </ul>
-
-            <div class="build-actions">
-                <button class="view-btn">View Details</button>
-                <button class="delete-btn">Delete</button>
-            </div>
-        </div>
-        {% endfor %}
+  {% if builds %}
+  <div class="builds-grid">
+    {% for build in builds %}
+    <div class="build-card">
+      <h3>{{ build[1] | capitalize }} Build</h3>
+      <ul>
+        <li><strong>CPU:</strong> {{ build[2] }}</li>
+        <li><strong>GPU:</strong> {{ build[5] }}</li>
+        <li><strong>Storage:</strong> {{ build[6] }}</li>
+      </ul>
+      <a href="{{ url_for('view_build', id=build[0]) }}" class="btn-view">View Details</a>
     </div>
-    {% else %}
-    <div class="empty-builds">
-        <img src="{{ url_for('static', filename='img/empty_build.svg') }}" alt="No builds">
-        <p>You haven’t saved any builds yet.</p>
-        <a href="{{ url_for('choose_cpu') }}" class="btn">Start a Build</a>
-    </div>
-    {% endif %}
-</section>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No builds found. <a href="{{ url_for('choose_purpose') }}">Start building one!</a></p>
+  {% endif %}
+</div>
 {% endblock %}

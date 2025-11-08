@@ -44,12 +44,19 @@ def login():
 
         with sqlite3.connect(DB_NAME) as conn:
             cur = conn.cursor()
-            cur.execute("SELECT username, password FROM users WHERE username = ?", (username,))
+            cur.execute("SELECT username, password, role FROM users WHERE username = ?", (username,))
             user = cur.fetchone()
 
         if user and check_password_hash(user[1], password):
             session['user'] = user[0]
+            session['role'] = user[2]  # <-- store role in session
+
             flash('Login successful!', 'success')
+            
+            # Redirect admin to dashboard automatically
+            if user[2] == 'admin':
+                return redirect(url_for('admin_dashboard'))
+
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password.', 'danger')
@@ -218,7 +225,7 @@ def choose_case():
 
     if request.method == 'POST':
         session['case'] = request.form['case']
-        return redirect(url_for('summary'))  # next step (summary page) later
+        return redirect(url_for('delivery_info'))
 
     return render_template('choose_case.html', purpose=purpose)
 
@@ -276,14 +283,82 @@ def my_builds():
         flash('Please log in to view your builds.', 'warning')
         return redirect(url_for('login'))
 
-    username = session['user']
+    user = session['user']
 
     with sqlite3.connect(DB_NAME) as conn:
         cur = conn.cursor()
-        cur.execute('SELECT id, purpose, cpu, motherboard, ram, gpu, storage, psu, pc_case, date_created FROM builds WHERE username=? ORDER BY date_created DESC', (username,))
+        cur.execute('''
+            SELECT id, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact
+            FROM builds
+            WHERE user = ?
+            ORDER BY id DESC
+        ''', (user,))
         builds = cur.fetchall()
 
     return render_template('my_builds.html', builds=builds)
+
+
+@app.route('/view-build/<int:id>')
+def view_build(id):
+    if 'user' not in session:
+        flash('Please log in first.', 'warning')
+        return redirect(url_for('login'))
+
+    user = session['user']
+
+    with sqlite3.connect(DB_NAME) as conn:
+        cur = conn.cursor()
+        cur.execute('''
+            SELECT id, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact
+            FROM builds
+            WHERE id = ? AND user = ?
+        ''', (id, user))
+        build = cur.fetchone()
+
+    if not build:
+        flash('Build not found or access denied.', 'danger')
+        return redirect(url_for('my_builds'))
+
+    return render_template('view_build.html', build=build)
+
+
+
+@app.route('/delivery-info', methods=['GET', 'POST'])
+def delivery_info():
+    if 'user' not in session:
+        flash('Please log in to continue.', 'warning')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        fullname = request.form['fullname']
+        address = request.form['address']
+        contact = request.form['contact']
+
+        # Retrieve selected parts from session
+        purpose = session.get('purpose')
+        cpu = session.get('cpu')
+        mobo = session.get('mobo')
+        ram = session.get('ram')
+        gpu = session.get('gpu')
+        storage = session.get('storage')
+        psu = session.get('psu')
+        case = session.get('case')
+
+        user = session['user']
+
+        # Save to database
+        with sqlite3.connect(DB_NAME) as conn:
+            cur = conn.cursor()
+            cur.execute("""
+                INSERT INTO builds (user, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user, purpose, cpu, mobo, ram, gpu, storage, psu, case, fullname, address, contact))
+            conn.commit()
+
+        flash('Your build and delivery info have been saved!', 'success')
+        return redirect(url_for('my_builds'))
+
+    return render_template('delivery_info.html')
 
 
 if __name__ == '__main__':

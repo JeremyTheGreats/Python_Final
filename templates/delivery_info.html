@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Delivery Information | J-Tech Builder{% endblock %}
+{% block content %}
+<div class="builder-container">
+    <h2>📦 Delivery Information</h2>
+    <p>Please provide your delivery details so we can ship your build.</p>
+
+    <form method="POST" class="delivery-form">
+        <label>Full Name</label>
+        <input type="text" name="fullname" required placeholder="Enter your full name">
+
+        <label>Address</label>
+        <textarea name="address" required placeholder="Enter your full address"></textarea>
+
+        <label>Contact Number</label>
+        <input type="text" name="contact" required placeholder="e.g. 09XXXXXXXXX">
+
+        <button type="submit" class="btn">Submit Order ✅</button>
+    </form>
+</div>
+{% endblock %}

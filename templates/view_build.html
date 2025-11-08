@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Build Details | J-Tech{% endblock %}
+{% block content %}
+<div class="build-details-container">
+  <h2>🔍 Build Details</h2>
+
+  <div class="build-details-card">
+    <h3>{{ build[1] | capitalize }} Build</h3>
+    <ul>
+      <li><strong>CPU:</strong> {{ build[2] }}</li>
+      <li><strong>Motherboard:</strong> {{ build[3] }}</li>
+      <li><strong>RAM:</strong> {{ build[4] }}</li>
+      <li><strong>GPU:</strong> {{ build[5] }}</li>
+      <li><strong>Storage:</strong> {{ build[6] }}</li>
+      <li><strong>Power Supply:</strong> {{ build[7] }}</li>
+      <li><strong>Case:</strong> {{ build[8] }}</li>
+    </ul>
+
+    <div class="delivery-info">
+      <h4>Delivery Information</h4>
+      <p><strong>Name:</strong> {{ build[9] }}</p>
+      <p><strong>Address:</strong> {{ build[10] }}</p>
+      <p><strong>Contact:</strong> {{ build[11] }}</p>
+    </div>
+
+    <a href="{{ url_for('my_builds') }}" class="btn-back">← Back to My Builds</a>
+  </div>
+</div>
+{% endblock %}
