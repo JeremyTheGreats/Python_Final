@@ -144,6 +144,7 @@ def choose_cpu():
         cpu_name, cpu_price = selected_value.split('|')
         
         session['cpu_price'] = float(cpu_price)
+        session['cpu_name'] = cpu_name
         
         return redirect(url_for('choose_mobo'))
 
@@ -161,6 +162,7 @@ def choose_mobo():
         mobo_name, mobo_price = selected_mobo.split('|') 
         
         session['mobo_price'] = float(mobo_price)
+        session['mobo_name'] = mobo_name
         
         return redirect(url_for('choose_ram'))  
 
@@ -178,6 +180,7 @@ def choose_ram():
         ram_name, ram_price = selected_ram.split('|') 
         
         session['ram_price'] = float(ram_price)
+        session['ram_name'] = ram_name
         
         flash('RAM selected successfully!', 'success')
         return redirect(url_for('choose_gpu'))  
@@ -201,6 +204,7 @@ def choose_gpu():
         gpu_name, gpu_price = session_gpu.split('|')
         
         session['gpu_price'] = float(gpu_price)
+        session['gpu_name'] = gpu_name
         
         return redirect(url_for('choose_storage'))  
 
@@ -221,6 +225,8 @@ def choose_storage():
         selected_storage = request.form['storage']
         session['storage'] = selected_storage
         storage_name, storage_price = selected_storage.split('|')
+        
+        session['storage_name'] = storage_name
         session['storage_price'] = float(storage_price)
         
         return redirect(url_for('choose_psu')) 
@@ -239,6 +245,7 @@ def choose_psu():
         psu_name, psu_price = session_psu.split('|')
         
         session['psu_price'] = float(psu_price)
+        session['psu_name'] = psu_name
         
         return redirect(url_for('choose_case')) 
 
@@ -260,6 +267,7 @@ def choose_case():
         case_name, case_price = session_case.split('|')
         
         session['case_price'] = float(case_price)
+        session['case_name'] = case_name
         
         return redirect(url_for('delivery_info'))
 
@@ -373,13 +381,13 @@ def delivery_info():
 
        
         purpose = session.get('purpose')
-        cpu = session.get('cpu')
-        mobo = session.get('mobo')
-        ram = session.get('ram')
-        gpu = session.get('gpu')
-        storage = session.get('storage')
-        psu = session.get('psu')
-        case = session.get('case')
+        cpu = session.get('cpu_name')
+        mobo = session.get('mobo_name')
+        ram = session.get('ram_name')
+        gpu = session.get('gpu_name')
+        storage = session.get('storage_name')
+        psu = session.get('psu_name')
+        case = session.get('case_name')
 
         user = session['user']
         cpu_price = session.get('cpu_price', 0)
@@ -436,6 +444,22 @@ def admin_update_status(build_id):
         conn.commit()
 
     flash('✅ Order status updated successfully!', 'success')
+    return redirect(url_for('admin_view_orders'))
+
+@app.route('/admin/update-address/<int:build_id>', methods=['POST'])
+def admin_update_address(build_id):
+    if 'user' not in session or session.get('role') != 'admin':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('login'))
+
+    new_address = request.form['address']
+
+    with sqlite3.connect(DB_NAME) as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE builds SET address = ? WHERE id = ?", (new_address, build_id))
+        conn.commit()
+
+    flash('✅ Address updated successfully!', 'success')
     return redirect(url_for('admin_view_orders'))
 
 
