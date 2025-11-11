@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+<main class="builder-page">
+
 <div class="builder-step">
     <h1>Select Your Storage</h1>
     <p class="step-description">Choose your storage drive(s) based on your <strong>{{ purpose }}</strong> build preferences.</p>
@@ -10,21 +12,21 @@
                 <img src="{{ url_for('static', filename='img/ssd1.jpg') }}" alt="Samsung 980 PRO NVMe SSD">
                 <h3>Samsung 980 PRO NVMe SSD</h3>
                 <p>₱7,499 — 1TB PCIe 4.0 SSD for ultra-fast game loading.</p>
-                <input type="radio" name="storage" value="Samsung 980 PRO NVMe SSD" required>
+                <input type="radio" name="storage" value="Samsung 980 PRO NVMe SSD|7499" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ssd2.jpg') }}" alt="Crucial P5 Plus NVMe SSD">
                 <h3>Crucial P5 Plus NVMe SSD</h3>
                 <p>₱6,900 — Excellent balance of speed and reliability.</p>
-                <input type="radio" name="storage" value="Crucial P5 Plus NVMe SSD">
+                <input type="radio" name="storage" value="Crucial P5 Plus NVMe SSD|6900">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/hdd1.jpg') }}" alt="Seagate Barracuda 2TB HDD">
                 <h3>Seagate Barracuda 2TB HDD</h3>
                 <p>₱3,100 — Great for storing large game libraries.</p>
-                <input type="radio" name="storage" value="Seagate Barracuda 2TB HDD">
+                <input type="radio" name="storage" value="Seagate Barracuda 2TB HDD|3100">
             </label>
 
         {% elif purpose == 'office' %}
@@ -32,21 +34,21 @@
                 <img src="{{ url_for('static', filename='img/ssd3.jpg') }}" alt="Kingston A2000 NVMe SSD">
                 <h3>Kingston A2000 NVMe SSD</h3>
                 <p>₱3,500 — Fast boot and app load speeds for office use.</p>
-                <input type="radio" name="storage" value="Kingston A2000 NVMe SSD" required>
+                <input type="radio" name="storage" value="Kingston A2000 NVMe SSD|3500" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ssd4.jpg') }}" alt="WD Blue SN570 NVMe SSD">
                 <h3>WD Blue SN570 NVMe SSD</h3>
                 <p>₱3,999 — Reliable choice for productivity workloads.</p>
-                <input type="radio" name="storage" value="WD Blue SN570 NVMe SSD">
+                <input type="radio" name="storage" value="WD Blue SN570 NVMe SSD|3999">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/hdd2.jpg') }}" alt="Toshiba P300 1TB HDD">
                 <h3>Toshiba P300 1TB HDD</h3>
                 <p>₱2,600 — Good secondary drive for documents and backups.</p>
-                <input type="radio" name="storage" value="Toshiba P300 1TB HDD">
+                <input type="radio" name="storage" value="Toshiba P300 1TB HDD|2600">
             </label>
 
         {% elif purpose == 'editing' %}
@@ -54,21 +56,21 @@
                 <img src="{{ url_for('static', filename='img/ssd5.jpg') }}" alt="Samsung 990 PRO NVMe SSD">
                 <h3>Samsung 990 PRO NVMe SSD</h3>
                 <p>₱9,900 — Exceptional speed for video editing and 4K projects.</p>
-                <input type="radio" name="storage" value="Samsung 990 PRO NVMe SSD" required>
+                <input type="radio" name="storage" value="Samsung 990 PRO NVMe SSD|9900" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ssd6.jpg') }}" alt="Corsair MP600 Pro XT SSD">
                 <h3>Corsair MP600 Pro XT SSD</h3>
                 <p>₱8,700 — Top-tier performance for creative workloads.</p>
-                <input type="radio" name="storage" value="Corsair MP600 Pro XT SSD">
+                <input type="radio" name="storage" value="Corsair MP600 Pro XT SSD|8700">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/hdd3.jpg') }}" alt="WD Black 4TB HDD">
                 <h3>WD Black 4TB HDD</h3>
                 <p>₱6,300 — Plenty of space for large video files and backups.</p>
-                <input type="radio" name="storage" value="WD Black 4TB HDD">
+                <input type="radio" name="storage" value="WD Black 4TB HDD|6300">
             </label>
 
         {% elif purpose == 'budget' %}
@@ -76,25 +78,26 @@
                 <img src="{{ url_for('static', filename='img/ssd7.jpg') }}" alt="ADATA SU650 SSD">
                 <h3>ADATA SU650 SSD</h3>
                 <p>₱2,100 — Great value SSD for faster system performance.</p>
-                <input type="radio" name="storage" value="ADATA SU650 SSD" required>
+                <input type="radio" name="storage" value="ADATA SU650 SSD|2100" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/hdd4.jpg') }}" alt="Seagate Barracuda 1TB HDD">
                 <h3>Seagate Barracuda 1TB HDD</h3>
                 <p>₱2,200 — Affordable and spacious enough for basic use.</p>
-                <input type="radio" name="storage" value="Seagate Barracuda 1TB HDD">
+                <input type="radio" name="storage" value="Seagate Barracuda 1TB HDD|2200">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ssd8.jpg') }}" alt="TeamGroup GX1 480GB SSD">
                 <h3>TeamGroup GX1 480GB SSD</h3>
                 <p>₱1,999 — Compact SSD, perfect for light builds.</p>
-                <input type="radio" name="storage" value="TeamGroup GX1 480GB SSD">
+                <input type="radio" name="storage" value="TeamGroup GX1 480GB SSD|1999">
             </label>
         {% endif %}
 
         <button type="submit" class="btn">Next →</button>
     </form>
 </div>
+</main>
 {% endblock %}

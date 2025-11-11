@@ -18,8 +18,16 @@
 
                     {% if 'user' in session %}
                         <li class="welcome">Welcome, {{ session['user'] }}</li>
+
+                        <!-- ✅ ADMIN NAVIGATION -->
+                        {% if session.get('role') == 'admin' %}
+                            <li><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('my_builds') }}">My Builds</a></li>
+                        {% endif %}
+                        <!-- ✅ END ADMIN NAVIGATION -->
+
                         <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                        <li><a href="{{ url_for('my_builds') }}">My Builds</a></li>
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Login</a></li>
                         <li><a href="{{ url_for('register') }}">Register</a></li>

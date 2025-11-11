@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Build Details | J-Tech{% endblock %}
 {% block content %}
-<div class="build-details-container">
-  <h2>🔍 Build Details</h2>
 
+<div class="build-details-container">
   <div class="build-details-card">
+    <h2>🔍 Build Details</h2>
     <h3>{{ build[1] | capitalize }} Build</h3>
+
     <ul>
-      <li><strong>CPU:</strong> {{ build[2] }}</li>
-      <li><strong>Motherboard:</strong> {{ build[3] }}</li>
-      <li><strong>RAM:</strong> {{ build[4] }}</li>
-      <li><strong>GPU:</strong> {{ build[5] }}</li>
-      <li><strong>Storage:</strong> {{ build[6] }}</li>
-      <li><strong>Power Supply:</strong> {{ build[7] }}</li>
-      <li><strong>Case:</strong> {{ build[8] }}</li>
+      <li><strong>CPU:</strong> <span>{{ build[2] }}</span></li>
+      <li><strong>Motherboard:</strong> <span>{{ build[3] }}</span></li>
+      <li><strong>RAM:</strong> <span>{{ build[4] }}</span></li>
+      <li><strong>GPU:</strong> <span>{{ build[5] }}</span></li>
+      <li><strong>Storage:</strong> <span>{{ build[6] }}</span></li>
+      <li><strong>Power Supply:</strong> <span>{{ build[7] }}</span></li>
+      <li><strong>Case:</strong> <span>{{ build[8] }}</span></li>
+      <li><strong>Total Price:</strong> <span>₱{{ build[13] }}</span></li>
     </ul>
 
     <div class="delivery-info">
@@ -21,9 +23,13 @@
       <p><strong>Name:</strong> {{ build[9] }}</p>
       <p><strong>Address:</strong> {{ build[10] }}</p>
       <p><strong>Contact:</strong> {{ build[11] }}</p>
+      <p><strong>Status:</strong> 
+        <span class="status {{ build[12] }}">{{ build[12] }}</span>
+      </p>
     </div>
 
     <a href="{{ url_for('my_builds') }}" class="btn-back">← Back to My Builds</a>
   </div>
 </div>
+
 {% endblock %}

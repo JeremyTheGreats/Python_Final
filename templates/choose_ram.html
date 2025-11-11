@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+
+<main class="builder-page">
+
+
 <div class="builder-step">
     <h1>Select Your RAM</h1>
     <p class="step-description">Choose the best memory for your <strong>{{ purpose }}</strong> build.</p>
@@ -10,21 +14,21 @@
                 <img src="{{ url_for('static', filename='img/ram1.jpg') }}" alt="Corsair Vengeance 16GB DDR5">
                 <h3>Corsair Vengeance 16GB DDR5</h3>
                 <p>₱4,200 — Fast and reliable for gaming.</p>
-                <input type="radio" name="ram" value="Corsair Vengeance 16GB DDR5" required>
+                <input type="radio" name="ram" value="Corsair Vengeance 16GB DDR5|4200" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram2.jpg') }}" alt="G.Skill Trident Z 32GB DDR5">
                 <h3>G.Skill Trident Z 32GB DDR5</h3>
                 <p>₱7,500 — High performance for advanced gamers.</p>
-                <input type="radio" name="ram" value="G.Skill Trident Z 32GB DDR5">
+                <input type="radio" name="ram" value="G.Skill Trident Z 32GB DDR5|7500">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram3.jpg') }}" alt="Kingston Fury Beast 16GB DDR4">
                 <h3>Kingston Fury Beast 16GB DDR4</h3>
                 <p>₱3,800 — Affordable and great for smooth gameplay.</p>
-                <input type="radio" name="ram" value="Kingston Fury Beast 16GB DDR4">
+                <input type="radio" name="ram" value="Kingston Fury Beast 16GB DDR4|3800">
             </label>
 
         {% elif purpose == 'office' %}
@@ -32,21 +36,21 @@
                 <img src="{{ url_for('static', filename='img/ram4.jpg') }}" alt="Crucial 8GB DDR4">
                 <h3>Crucial 8GB DDR4</h3>
                 <p>₱1,800 — Ideal for office productivity and multitasking.</p>
-                <input type="radio" name="ram" value="Crucial 8GB DDR4" required>
+                <input type="radio" name="ram" value="Crucial 8GB DDR4|1800" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram5.jpg') }}" alt="Team Elite 16GB DDR4">
                 <h3>Team Elite 16GB DDR4</h3>
                 <p>₱3,200 — Smooth performance for spreadsheets and apps.</p>
-                <input type="radio" name="ram" value="Team Elite 16GB DDR4">
+                <input type="radio" name="ram" value="Team Elite 16GB DDR4|3200">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram6.jpg') }}" alt="ADATA 8GB DDR4">
                 <h3>ADATA 8GB DDR4</h3>
                 <p>₱1,600 — Great value for everyday office tasks.</p>
-                <input type="radio" name="ram" value="ADATA 8GB DDR4">
+                <input type="radio" name="ram" value="ADATA 8GB DDR4|1600">
             </label>
 
         {% elif purpose == 'editing' %}
@@ -54,21 +58,21 @@
                 <img src="{{ url_for('static', filename='img/ram7.jpg') }}" alt="Corsair Dominator 32GB DDR5">
                 <h3>Corsair Dominator 32GB DDR5</h3>
                 <p>₱8,200 — Fast rendering and smooth workflow for editors.</p>
-                <input type="radio" name="ram" value="Corsair Dominator 32GB DDR5" required>
+                <input type="radio" name="ram" value="Corsair Dominator 32GB DDR5|8200" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram8.jpg') }}" alt="G.Skill Ripjaws 64GB DDR5">
                 <h3>G.Skill Ripjaws 64GB DDR5</h3>
                 <p>₱12,500 — Excellent for heavy video and 3D editing.</p>
-                <input type="radio" name="ram" value="G.Skill Ripjaws 64GB DDR5">
+                <input type="radio" name="ram" value="G.Skill Ripjaws 64GB DDR5|12500">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram9.jpg') }}" alt="Kingston Fury Renegade 32GB DDR4">
                 <h3>Kingston Fury Renegade 32GB DDR4</h3>
                 <p>₱7,800 — Solid performance for rendering and animation.</p>
-                <input type="radio" name="ram" value="Kingston Fury Renegade 32GB DDR4">
+                <input type="radio" name="ram" value="Kingston Fury Renegade 32GB DDR4|7800">
             </label>
 
         {% elif purpose == 'budget' %}
@@ -76,25 +80,26 @@
                 <img src="{{ url_for('static', filename='img/ram10.jpg') }}" alt="ADATA 8GB DDR4">
                 <h3>ADATA 8GB DDR4</h3>
                 <p>₱1,500 — Reliable and affordable for basic users.</p>
-                <input type="radio" name="ram" value="ADATA 8GB DDR4" required>
+                <input type="radio" name="ram" value="ADATA 8GB DDR4|1500" required>
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram11.jpg') }}" alt="Crucial 8GB DDR4">
                 <h3>Crucial 8GB DDR4</h3>
                 <p>₱1,700 — Great balance between price and performance.</p>
-                <input type="radio" name="ram" value="Crucial 8GB DDR4">
+                <input type="radio" name="ram" value="Crucial 8GB DDR4|1700">
             </label>
 
             <label class="part-card">
                 <img src="{{ url_for('static', filename='img/ram12.jpg') }}" alt="Team Elite 4GB DDR4">
                 <h3>Team Elite 4GB DDR4</h3>
                 <p>₱1,000 — Basic but gets the job done.</p>
-                <input type="radio" name="ram" value="Team Elite 4GB DDR4">
+                <input type="radio" name="ram" value="Team Elite 4GB DDR4|1000">
             </label>
         {% endif %}
 
         <button type="submit" class="btn">Next →</button>
     </form>
 </div>
+</main>
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Admin | Manage Users{% endblock %}
+
+{% block content %}
+<section class="admin-users">
+    
+    <div class="header-center">
+        <h1>Manage Users</h1>
+        <p>View and update user roles for system accounts.</p>
+    </div>
+
+    {% if users %}
+    <table class="users-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Change Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user['id'] }}</td>
+                <td>{{ user['username'] }}</td>
+                <td>{{ user['role'] }}</td>
+                <td>
+                    <form action="{{ url_for('update_role', user_id=user['id']) }}" method="POST" class="update-form">
+                        <select name="role" required>
+                            <option value="user" {% if user['role'] == 'user' %}selected{% endif %}>User</option>
+                            <option value="admin" {% if user['role'] == 'admin' %}selected{% endif %}>Admin</option>
+                        </select>
+                        <button type="submit">Save</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No users found.</p>
+    {% endif %}
+</section>
+{% endblock %}

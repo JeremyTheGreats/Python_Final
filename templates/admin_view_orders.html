@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Admin | View Orders{% endblock %}
+
+{% block content %}
+<section class="admin-orders">
+    <h1>Customer Orders (PC Builds)</h1>
+    <p>Monitor and manage all builds from J-Tech customers.</p>
+
+    {% if builds %}
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Purpose</th>
+                <th>CPU</th>
+                <th>GPU</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in builds %}
+            <tr>
+                <td>{{ b['id'] }}</td>
+                <td>{{ b['user'] }}</td>
+                <td>{{ b['purpose'] }}</td>
+                <td>{{ b['cpu'] }}</td>
+                <td>{{ b['gpu'] }}</td>
+
+                <!-- Address Update Form -->
+                <td>
+                    <form action="{{ url_for('admin_update_status', build_id=b['id']) }}" method="POST" class="update-form">
+                        <input type="text" name="address" value="{{ b['address'] }}" required>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+
+                <td>{{ b['contact'] }}</td>
+
+                <!-- Status Update Form -->
+                <td>
+                    <form action="{{ url_for('admin_update_status', build_id=b['id']) }}" method="POST" class="update-form">
+                        <select name="status" required>
+                            <option value="Pending" {% if b['status'] == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="Shipped" {% if b['status'] == 'Shipped' %}selected{% endif %}>Shipped</option>
+                            <option value="Delivered" {% if b['status'] == 'Delivered' %}selected{% endif %}>Delivered</option>
+                        </select>
+                        <button type="submit">Save</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No orders found yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

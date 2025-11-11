@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | J-Tech{% endblock %}
+{% block content %}
+
+<div class="admin-dashboard">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ session['user'] }}! Manage the J-Tech system here.</p>
+
+    <div class="admin-grid">
+        
+        <a href="{{ url_for('admin_view_orders') }}" class="admin-card">
+            <img src="{{ url_for('static', filename='img/order.jpg') }}" alt="Orders">
+            <h3>View Orders</h3>
+            <p>Monitor customer builds and update delivery locations.</p>
+        </a>
+ 
+        
+        <a href="{{ url_for('manage_users') }}" class="admin-card">
+            <img src="{{ url_for('static', filename='img/account.jpg') }}" alt="Users">
+            <h3>Manage Users</h3>
+            <p>View registered accounts and assign roles.</p>
+        </a>
+    </div>  
+</div>
+
+{% endblock %}

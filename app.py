@@ -49,12 +49,13 @@ def login():
 
         if user and check_password_hash(user[1], password):
             session['user'] = user[0]
-            session['role'] = user[2]  # <-- store role in session
+            session['role'] = user[2]  
 
             flash('Login successful!', 'success')
             
-            # Redirect admin to dashboard automatically
+           
             if user[2] == 'admin':
+                
                 return redirect(url_for('admin_dashboard'))
 
             return redirect(url_for('home'))
@@ -62,7 +63,18 @@ def login():
             flash('Invalid username or password.', 'danger')
 
     return render_template('login.html')
+
+
+
+@app.route('/admin/dashboard')
+def admin_dashboard():
+    if 'user' not in session or session.get('role') != 'admin':
+        flash('Access denied! Admins only.', 'danger')
+        return redirect(url_for('login'))
+    
+    return render_template('admin_dashboard.html')
         
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -72,12 +84,11 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
-        # ✅ Password confirmation check
+        
         if password != confirm_password:
             flash('Passwords do not match.', 'danger')
             return redirect(url_for('register'))
 
-        # ✅ Hash the password for security
         hashed_password = generate_password_hash(password)
 
         try:
@@ -129,9 +140,12 @@ def choose_cpu():
         cpus = cur.fetchall()
 
     if request.method == 'POST':
-        selected_cpu = request.form['cpu']
-        session['cpu'] = selected_cpu
-        return redirect(url_for('choose_mobo'))  # ✅ Go to next step
+        selected_value = request.form['cpu']
+        cpu_name, cpu_price = selected_value.split('|')
+        
+        session['cpu_price'] = float(cpu_price)
+        
+        return redirect(url_for('choose_mobo'))
 
     return render_template('choose_cpu.html', purpose=purpose, cpus=cpus)
 
@@ -144,8 +158,11 @@ def choose_mobo():
 
     if request.method == 'POST':
         selected_mobo = request.form['mobo']
-        session['mobo'] = selected_mobo
-        return redirect(url_for('choose_ram'))  # Next step after mobo
+        mobo_name, mobo_price = selected_mobo.split('|') 
+        
+        session['mobo_price'] = float(mobo_price)
+        
+        return redirect(url_for('choose_ram'))  
 
     return render_template('choose_mobo.html', purpose=purpose)
 
@@ -158,9 +175,12 @@ def choose_ram():
 
     if request.method == 'POST':
         selected_ram = request.form['ram']
-        session['ram'] = selected_ram
+        ram_name, ram_price = selected_ram.split('|') 
+        
+        session['ram_price'] = float(ram_price)
+        
         flash('RAM selected successfully!', 'success')
-        return redirect(url_for('choose_gpu'))  # ✅ next step later
+        return redirect(url_for('choose_gpu'))  
 
     return render_template('choose_ram.html', purpose=purpose)
 
@@ -176,8 +196,13 @@ def choose_gpu():
         return redirect(url_for('choose_purpose'))
 
     if request.method == 'POST':
-        session['gpu'] = request.form['gpu']
-        return redirect(url_for('choose_storage'))  # ✅ next step: storage
+        session_gpu = request.form['gpu']
+        
+        gpu_name, gpu_price = session_gpu.split('|')
+        
+        session['gpu_price'] = float(gpu_price)
+        
+        return redirect(url_for('choose_storage'))  
 
     return render_template('choose_gpu.html', purpose=purpose)
 
@@ -195,7 +220,10 @@ def choose_storage():
     if request.method == 'POST':
         selected_storage = request.form['storage']
         session['storage'] = selected_storage
-        return redirect(url_for('choose_psu'))  # next step later
+        storage_name, storage_price = selected_storage.split('|')
+        session['storage_price'] = float(storage_price)
+        
+        return redirect(url_for('choose_psu')) 
 
     return render_template('choose_storage.html', purpose=purpose)
 
@@ -207,8 +235,12 @@ def choose_psu():
         return redirect(url_for('login'))
 
     if request.method == 'POST':
-        session['psu'] = request.form['psu']
-        return redirect(url_for('choose_case'))  # next step
+        session_psu = request.form['psu']
+        psu_name, psu_price = session_psu.split('|')
+        
+        session['psu_price'] = float(psu_price)
+        
+        return redirect(url_for('choose_case')) 
 
     return render_template('choose_psu.html')
 
@@ -224,7 +256,11 @@ def choose_case():
         return redirect(url_for('choose_purpose'))
 
     if request.method == 'POST':
-        session['case'] = request.form['case']
+        session_case = request.form['case']
+        case_name, case_price = session_case.split('|')
+        
+        session['case_price'] = float(case_price)
+        
         return redirect(url_for('delivery_info'))
 
     return render_template('choose_case.html', purpose=purpose)
@@ -236,7 +272,7 @@ def summary():
         flash('Please log in to view your build summary.', 'warning')
         return redirect(url_for('login'))
 
-    # Gather all selected parts
+    
     selected_parts = {
         'Purpose': session.get('purpose', 'Not selected'),
         'CPU': session.get('cpu', 'Not selected'),
@@ -266,6 +302,7 @@ def save_build():
     storage = session.get('storage', '')
     psu = session.get('psu', '')
     pc_case = session.get('case', '')
+    
 
     with sqlite3.connect(DB_NAME) as conn:
         conn.execute('''INSERT INTO builds 
@@ -309,7 +346,7 @@ def view_build(id):
     with sqlite3.connect(DB_NAME) as conn:
         cur = conn.cursor()
         cur.execute('''
-            SELECT id, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact
+            SELECT id, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact, status, price
             FROM builds
             WHERE id = ? AND user = ?
         ''', (id, user))
@@ -334,7 +371,7 @@ def delivery_info():
         address = request.form['address']
         contact = request.form['contact']
 
-        # Retrieve selected parts from session
+       
         purpose = session.get('purpose')
         cpu = session.get('cpu')
         mobo = session.get('mobo')
@@ -345,20 +382,107 @@ def delivery_info():
         case = session.get('case')
 
         user = session['user']
-
-        # Save to database
+        cpu_price = session.get('cpu_price', 0)
+        mobo_price = session.get('mobo_price', 0)
+        ram_price = session.get('ram_price', 0)
+        gpu_price = session.get('gpu_price', 0)
+        storage_price = session.get('storage_price', 0)
+        psu_price = session.get('psu_price', 0)
+        case_price = session.get('case_price', 0)
+        
+        total_price = cpu_price + mobo_price + ram_price + gpu_price + storage_price + psu_price + case_price
+                       
+        
         with sqlite3.connect(DB_NAME) as conn:
             cur = conn.cursor()
             cur.execute("""
-                INSERT INTO builds (user, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (user, purpose, cpu, mobo, ram, gpu, storage, psu, case, fullname, address, contact))
+                INSERT INTO builds (user, purpose, cpu, mobo, ram, gpu, storage, psu, cases, fullname, address, contact, status, price)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (user, purpose, cpu, mobo, ram, gpu, storage, psu, case, fullname, address, contact, "Pending", total_price))
             conn.commit()
 
         flash('Your build and delivery info have been saved!', 'success')
         return redirect(url_for('my_builds'))
 
     return render_template('delivery_info.html')
+
+
+@app.route('/admin/view-orders')
+def admin_view_orders():
+    if 'user' not in session or session.get('role') != 'admin':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('login'))
+
+    with sqlite3.connect(DB_NAME) as conn:
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM builds ORDER BY id DESC")
+        builds = cur.fetchall()
+
+    return render_template('admin_view_orders.html', builds=builds)
+
+
+@app.route('/admin/update-status/<int:build_id>', methods=['POST'])
+def admin_update_status(build_id):
+    if 'user' not in session or session.get('role') != 'admin':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('login'))
+
+    new_status = request.form['status']
+
+    with sqlite3.connect(DB_NAME) as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE builds SET status = ? WHERE id = ?", (new_status, build_id))
+        conn.commit()
+
+    flash('✅ Order status updated successfully!', 'success')
+    return redirect(url_for('admin_view_orders'))
+
+
+
+@app.route('/admin/mark-delivered/<int:order_id>', methods=['POST'])
+def mark_delivered(order_id):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute("UPDATE orders SET status = 'Delivered' WHERE id = ?", (order_id,))
+    conn.commit()
+    conn.close()
+    flash('Order marked as delivered!', 'success')
+    return redirect(url_for('view_orders'))
+
+
+@app.route('/admin/manage-users')
+def manage_users():
+    if 'user' not in session or session.get('role') != 'admin':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('login'))
+
+    with sqlite3.connect(DB_NAME) as conn:
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT id, username, role FROM users ORDER BY id ASC")
+        users = cur.fetchall()
+
+    return render_template('admin_manage_users.html', users=users)
+
+
+@app.route('/admin/update-role/<int:user_id>', methods=['POST'])
+def update_role(user_id):
+    if 'user' not in session or session.get('role') != 'admin':
+        flash('Access denied.', 'danger')
+        return redirect(url_for('login'))
+
+    new_role = request.form['role']
+
+    with sqlite3.connect(DB_NAME) as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE users SET role = ? WHERE id = ?", (new_role, user_id))
+        conn.commit()
+
+    flash('✅ User role updated successfully!', 'success')
+    return redirect(url_for('manage_users'))
+
+
 
 
 if __name__ == '__main__':

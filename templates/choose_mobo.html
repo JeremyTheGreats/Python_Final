@@ -13,7 +13,7 @@
                 {% if purpose == 'gaming' %}
                     <!-- Gaming Motherboards -->
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="ASUS ROG STRIX Z790-F" required>
+                        <input type="radio" name="mobo" value="ASUS ROG STRIX Z790-F|18900" required>
                         <img src="{{ url_for('static', filename='img/mobo1.jpg') }}" alt="ASUS ROG Z790">
                         <h3>ASUS ROG STRIX Z790-F</h3>
                         <p>DDR5 | PCIe 5.0 | WiFi 6E | RGB lighting</p>
@@ -21,7 +21,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="MSI MPG B650 TOMAHAWK WIFI">
+                        <input type="radio" name="mobo" value="MSI MPG B650 TOMAHAWK WIFI|14700">
                         <img src="{{ url_for('static', filename='img/mobo2.jpg') }}" alt="MSI B650">
                         <h3>MSI MPG B650 TOMAHAWK WIFI</h3>
                         <p>AM5 | DDR5 | ATX | Great for Ryzen gaming builds</p>
@@ -29,7 +29,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="Gigabyte Z690 AORUS ELITE AX">
+                        <input type="radio" name="mobo" value="Gigabyte Z690 AORUS ELITE AX|15900">
                         <img src="{{ url_for('static', filename='img/mobo3.jpg') }}" alt="Gigabyte Z690">
                         <h3>Gigabyte Z690 AORUS ELITE AX</h3>
                         <p>Intel 12th/13th Gen | DDR5 | WiFi | PCIe 5.0</p>
@@ -39,7 +39,7 @@
                 {% elif purpose == 'office' %}
                     <!-- Office Motherboards -->
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="ASUS PRIME B660M-A" required>
+                        <input type="radio" name="mobo" value="ASUS PRIME B660M-A|8,200" required>
                         <img src="{{ url_for('static', filename='img/mobo4.jpg') }}" alt="ASUS B660M-A">
                         <h3>ASUS PRIME B660M-A</h3>
                         <p>Intel 12th Gen | DDR4 | mATX | Reliable performance</p>
@@ -47,7 +47,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="Gigabyte B550M DS3H">
+                        <input type="radio" name="mobo" value="Gigabyte B550M DS3H|6999">
                         <img src="{{ url_for('static', filename='img/mobo5.jpg') }}" alt="Gigabyte B550M">
                         <h3>Gigabyte B550M DS3H</h3>
                         <p>AMD AM4 | DDR4 | Dual M.2 | Great value</p>
@@ -55,7 +55,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="MSI H610M PRO-VDH">
+                        <input type="radio" name="mobo" value="MSI H610M PRO-VDH|6300">
                         <img src="{{ url_for('static', filename='img/mobo6.jpg') }}" alt="MSI H610M">
                         <h3>MSI H610M PRO-VDH</h3>
                         <p>Intel 12th Gen | DDR4 | Basic and efficient</p>
@@ -65,7 +65,7 @@
                 {% elif purpose == 'editing' %}
                     <!-- Editing Motherboards -->
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="ASUS ProArt X670E-Creator WIFI" required>
+                        <input type="radio" name="mobo" value="ASUS ProArt X670E-Creator WIFI|24500" required>
                         <img src="{{ url_for('static', filename='img/mobo7.jpg') }}" alt="ASUS ProArt">
                         <h3>ASUS ProArt X670E-Creator WIFI</h3>
                         <p>AMD AM5 | DDR5 | Dual Thunderbolt 4 | Creator-focused</p>
@@ -73,7 +73,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="MSI Z790 PRO-A">
+                        <input type="radio" name="mobo" value="MSI Z790 PRO-A|18900">
                         <img src="{{ url_for('static', filename='img/mobo8.jpg') }}" alt="MSI Z790">
                         <h3>MSI Z790 PRO-A</h3>
                         <p>Intel 13th Gen | DDR5 | PCIe 5.0 | Great for editing rigs</p>
@@ -81,7 +81,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="Gigabyte X670 AORUS ELITE AX">
+                        <input type="radio" name="mobo" value="Gigabyte X670 AORUS ELITE AX|20700">
                         <img src="{{ url_for('static', filename='img/mobo9.jpg') }}" alt="Gigabyte X670">
                         <h3>Gigabyte X670 AORUS ELITE AX</h3>
                         <p>AM5 | DDR5 | Solid power delivery for content work</p>
@@ -91,7 +91,7 @@
                 {% elif purpose == 'budget' %}
                     <!-- Budget Motherboards -->
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="ASRock H610M-HDV" required>
+                        <input type="radio" name="mobo" value="ASRock H610M-HDV|4800" required>
                         <img src="{{ url_for('static', filename='img/mobo10.jpg') }}" alt="ASRock H610M">
                         <h3>ASRock H610M-HDV</h3>
                         <p>Intel 12th Gen | DDR4 | Compact and affordable</p>
@@ -99,7 +99,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="Gigabyte A520M S2H">
+                        <input type="radio" name="mobo" value="Gigabyte A520M S2H|4500">
                         <img src="{{ url_for('static', filename='img/mobo11.jpg') }}" alt="Gigabyte A520M">
                         <h3>Gigabyte A520M S2H</h3>
                         <p>AMD AM4 | DDR4 | Entry-level with decent features</p>
@@ -107,7 +107,7 @@
                     </label>
 
                     <label class="part-card">
-                        <input type="radio" name="mobo" value="MSI A520M-A PRO">
+                        <input type="radio" name="mobo" value="MSI A520M-A PRO|4600">
                         <img src="{{ url_for('static', filename='img/mobo12.jpg') }}" alt="MSI A520M">
                         <h3>MSI A520M-A PRO</h3>
                         <p>AM4 | DDR4 | Stable and simple for budget builds</p>
